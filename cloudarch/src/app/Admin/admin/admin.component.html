@@ -1,0 +1,10 @@
+<ul class="menu">
+    <li class="cloudarch"><a><i class='bx bxs-cloud' style="font-size: 30px;"> CloudArch</i></a></li>
+    <li class="centered"><a (click)="tipo = 1">Archivos</a></li>
+    <li class="centered"><a (click)="tipo = 2">Crear Usuario</a></li>
+    <li class="centered"><a (click)="tipo = 3">Papelera Reciclaje</a></li>
+    <li class="welcome"><a><i class='bx bx-user-circle'></i>{{usuario.name }} {{usuario.lastname}}</a></li>
+</ul>
+    <app-employee *ngIf="tipo == 1" [user]="usuario"></app-employee>
+    <app-user *ngIf="tipo == 2"></app-user>
+    <app-papelera *ngIf="tipo == 3"></app-papelera>

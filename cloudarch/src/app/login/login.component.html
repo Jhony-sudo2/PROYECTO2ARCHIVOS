@@ -1,0 +1,31 @@
+<body>
+	<img class="wave" src="../../assets/wave.png">
+	<div class="container">
+		<div class="img">
+			<img src="../../assets/bg.svg">
+		</div>
+		<div class="login-content">
+			<form (ngSubmit)="Login()">
+				<img src="../../assets/avatar.svg">
+				<h2 class="title">Bienvenido</h2>
+           		<div class="input-div one">
+           		   <div class="i">
+           		   		<i class="fas fa-user"></i>
+           		   </div>
+           		   <div class="div">
+           		   		<input type="text" class="input" placeholder="username" name="username" [(ngModel)]="user.username" #username="ngModel" required>
+           		   </div>
+           		</div>
+           		<div class="input-div pass">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<input type="password" class="input" placeholder="password" name="password" [(ngModel)]="user.password" #password="ngModel" required>
+            	   </div>
+            	</div>
+            	<input type="submit" class="btn" [disabled]="username.invalid || password.invalid" value="Login">
+            </form>
+        </div>
+    </div>
+</body>

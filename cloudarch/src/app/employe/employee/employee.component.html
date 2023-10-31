@@ -1,0 +1,88 @@
+<body>
+    <div class="div1">
+        <nav>
+            <br>
+            <ul *ngIf="!showoptions">
+                <button id="buttonview" (click)="viewOptions()">+ Nuevo</button>
+            </ul>
+            <div class="options" *ngIf="showoptions" id="options">
+                <nav>
+                    <ul>
+                        <li (click)="CreateFolder()"><a><i class='bx bx-folder-plus'></i>Carpeta</a></li>
+                        <li (click)="CreateFile(2)"><a><i class='bx bxs-file-html'></i>Documento html</a></li>
+                        <li (click)="CreateFile(3)"><a><i class='bx bxs-file-plus'></i>Documento texto</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <ul>
+                <li [ngClass]="{'selected':opcionselected}" (click)="loadTable()">
+                    <a><i class='bx bx-cloud-drizzle'></i>Mi unidad
+                    </a>
+                </li>
+            </ul>
+            <ul>
+                <li [ngClass]="{'selected':!opcionselected}" (click)="loadshared()">
+                    <a><i class='bx bx-share-alt'></i>Compartido con migo
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="div2" *ngIf="opened.valor">
+        <table class="table table-striped">
+            <thead class="table dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Extension</th>
+                    <th>Propietario</th>
+                    <th *ngIf="!moduleshared">Fecha Creacion</th>
+                    <th *ngIf="moduleshared">Fecha Compartido</th>
+                </tr>
+            </thead>
+            <tbody class="table dark">
+                <tr *ngFor="let tmp of archivos">
+                    <td>
+                        <i class='bx'
+                            [ngClass]="{'bx bxs-folder-open': tmp.extension === 'directorio', 'bx bxs-file-txt': tmp.extension != 'directorio'}"></i>{{
+                        tmp.name }}
+                    </td>
+                    <td>{{tmp.extension}}</td>
+                    <td>{{tmp.user}}</td>
+                    <td>{{tmp.fecha}}</td>
+                    <td><button (click)="toggleMenu(tmp)">Opciones</button></td>
+                    <div class="menu-dropdown" *ngIf="elementoSeleccionado == tmp">
+                            <button (click)="edit(tmp)">Editar</button>
+                            <button (click)="delete(tmp)">Eliminar</button>
+                            <button (click)="share(tmp)">Compartir</button>
+                            <button (click)="CreateCopy(tmp)">Crear Copia</button>
+                            <button (click)="open(tmp)">Abrir</button>
+                    </div>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div class="div3" *ngIf="opened.valor">
+        <h2>{{pathActual}}</h2>
+        <button (click)="back()">Atras</button>
+    </div>
+
+
+    <div class="folder" *ngIf="showcreated">
+        <form>
+            <h2 *ngIf="tipoArchivo == 1">Nueva Carpeta</h2>
+            <h2 *ngIf="tipoArchivo == 3">Nueva Archivo html</h2>
+            <h2 *ngIf="tipoArchivo == 2">Nueva Archivo de texto</h2>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre del archivo" [(ngModel)]="newArchivo.name"
+             #nombre="ngModel" required>
+             {{nombre.invalid}}
+            <button (click)="ConfirmCreateFolder()" [disabled]="nombre.invalid" class="crear-button">Crear</button>
+            <button (click)="showcreated = false" class="cancelar-button">Cancelar</button>
+        </form>
+    </div>
+    <div class="editor" *ngIf="!opened.valor">
+        <app-editor [tmp]="elementoSeleccionado" [opened]="opened"></app-editor>
+    </div>
+</body>

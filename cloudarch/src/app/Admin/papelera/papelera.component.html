@@ -1,0 +1,25 @@
+<table class="table table-striped">
+    <thead class="table dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Propietario</th>
+            <th>Fecha Creacion</th>
+            <th>Fecha Eliminacion</th>
+        </tr>
+    </thead>
+    <tbody class="table dark">
+        <tr *ngFor="let tmp of archivos">
+            <td>
+                <i class='bx'
+                    [ngClass]="{'bx bxs-folder-open': tmp.extension === 'directorio', 'bx bxs-file-txt': tmp.extension != 'directorio'}"></i>{{
+                tmp.name }}
+            </td>
+            <td>{{tmp.user}}</td>
+            <td>{{tmp.fecha}}</td>
+            <td><button (click)="toggleMenu(tmp)">Opciones</button></td>
+            <div class="menu-dropdown" *ngIf="elementoSeleccionado == tmp">
+                    <button >Abrir</button>
+            </div>
+        </tr>
+    </tbody>
+</table>

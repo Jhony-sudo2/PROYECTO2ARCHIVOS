@@ -1,0 +1,181 @@
+body{
+    color: black;
+}
+
+.info {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info ul {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.info li {
+    display: inline-block;
+}
+
+.info i.bx {
+    margin-right: 5px; /* Espacio entre el ícono y el texto */
+}
+
+.info li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.info li a:hover {
+    text-decoration: underline;
+}
+
+.welcome {
+    margin-left: auto;
+
+}
+
+
+.div1{
+    background-color:  #f3efee ;
+    float: left;
+    width: 15%;
+}
+
+.div1 ul li a{
+    cursor: pointer;
+    list-style: none;
+}
+
+.div1 ul {
+    padding: 10;
+    margin: 05;
+    list-style: none;
+}
+
+
+
+.div1 button{
+    border: 1px solid black; /*anchura, estilo y color borde*/
+    padding: 10px; /*espacio alrededor texto*/
+    background-color: whitesmoke; /*color botón*/
+    color: blackQ; /*color texto*/
+    text-decoration: none; /*decoración texto*/
+    border-radius: 50px; /*bordes redondos*/
+}
+
+
+.div2{
+    float: left;
+    width: 50%;
+}
+
+.options{
+    background-color: antiquewhite;
+    width: 70%;
+    margin: 0 auto;
+    text-align: left;
+    border: 2px solid transparent;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
+    text-align: left;
+}
+
+.options ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.options ul li a{
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    text-align: left; 
+}
+
+.options ul li:hover,
+.options ul li a:hover {
+  transform: scale(1.05); 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+}
+
+.folder {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999; 
+    background-color: rgba(255, 255, 255, 0.9); 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
+
+.folder form h2 {
+    font-size: 20px;
+    color: #333;
+}
+
+.folder form label {
+    display: block;
+    margin: 10px 0;
+}
+
+.folder form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.folder form button {
+    padding: 10px 20px;
+    margin: 10px 10px 0 0;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.folder form .crear-button {
+    background-color: #4CAF50; /* Color para el botón de "Crear" */
+}
+
+.folder form .crear-button:hover {
+    background-color: #45a049; /* Color de resaltado al pasar el mouse */
+}
+
+.folder form .cancelar-button {
+    background-color: #f44336; /* Color para el botón de "Cancelar" */
+}
+
+.folder form .cancelar-button:hover {
+    background-color: #d32f2f; /* Color de resaltado al pasar el mouse */
+}
+
+.selected {
+    background-color:  #99d7f5 ;
+    color: black;
+}
+
+.menu-dropdown {
+    position: absolute;
+    display: block;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+    z-index: 1;
+  }
+
+.editor{
+    position: relative;
+    float: left;
+}
+  
+  
