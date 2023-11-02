@@ -1,0 +1,11 @@
+
+  .div1 {
+    flex: 1; /* Hace que div1 ocupe la mayor parte del espacio vertical disponible */
+    background-color: lightblue; /* Un color de fondo de ejemplo */
+    padding: 10px; /* Espaciado interno */
+  }
+  
+  .div2 {
+    background-color: lightgray; /* Un color de fondo de ejemplo */
+    padding: 10px; /* Espaciado interno */
+  }

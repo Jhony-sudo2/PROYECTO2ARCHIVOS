@@ -53,7 +53,7 @@
                     <div class="menu-dropdown" *ngIf="elementoSeleccionado == tmp">
                             <button (click)="edit(tmp)">Editar</button>
                             <button (click)="delete(tmp)">Eliminar</button>
-                            <button (click)="share(tmp)">Compartir</button>
+                            <button (click)="showshared = true">Compartir</button>
                             <button (click)="CreateCopy(tmp)">Crear Copia</button>
                             <button (click)="open(tmp)">Abrir</button>
                     </div>
@@ -77,11 +77,20 @@
             <h2 *ngIf="tipoArchivo == 2">Nueva Archivo de texto</h2>
             <input type="text" id="nombre" name="nombre" placeholder="Nombre del archivo" [(ngModel)]="newArchivo.name"
              #nombre="ngModel" required>
-             {{nombre.invalid}}
             <button (click)="ConfirmCreateFolder()" [disabled]="nombre.invalid" class="crear-button">Crear</button>
             <button (click)="showcreated = false" class="cancelar-button">Cancelar</button>
         </form>
     </div>
+    <div class="folder" *ngIf="showshared">
+        <form>
+            <h2>Ingrese el usuario al que desee compartir el archivo</h2>
+            <input type="text" id="nombre" name="nombre" placeholder="username" [(ngModel)]="usuarioCompartido"
+             #nombre="ngModel" required>
+            <button (click)="share(elementoSeleccionado)" [disabled]="nombre.invalid" class="crear-button">Compartir</button>
+            <button (click)="showshared = false" class="cancelar-button">Cancelar</button>
+        </form>
+    </div>
+
     <div class="editor" *ngIf="!opened.valor">
         <app-editor [tmp]="elementoSeleccionado" [opened]="opened"></app-editor>
     </div>

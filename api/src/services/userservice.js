@@ -2,7 +2,6 @@ const userModel = require('../models/userModel')
 
 async function getAllUsers (usuario,password2){
     const users = await userModel.find({username:usuario,password:password2});
-    console.log('devolviendo' + users);
     return users;
 };
 

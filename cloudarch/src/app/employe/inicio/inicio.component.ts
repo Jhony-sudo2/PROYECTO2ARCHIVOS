@@ -9,8 +9,9 @@ import { User } from 'src/app/Clases/User';
 })
 export class InicioComponent {
   
-  usuario:User
+  usuario:User = new User()
   constructor(private cookie:CookieService){
     this.usuario = JSON.parse(this.cookie.get('Usuario'))
   }
+  tipo:Number = 1
 }

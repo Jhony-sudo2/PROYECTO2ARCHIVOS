@@ -11,8 +11,12 @@ const getShared = async(req,res)=>{
 }
 
 const createFolder = async(req,res) =>{
-    await folderService.createFolder(req.body)
-    res.status(200).json({message:'OK'})
+    if(await folderService.Folderexist(req.body.user,req.body.path,req.body.name) == true){
+        await folderService.createFolder(req.body)
+        res.status(200).json({message:'OK'})
+    }else{
+        res.status(409).json({message:'CONFLICT'})
+    }
 }
 
 const deleteFolder = async(req,res)=>{
@@ -20,9 +24,15 @@ const deleteFolder = async(req,res)=>{
     res.status(200).json({message:'OK'})
 }
 
+const getpapelera = async (req,res)=>{
+    const folders = await folderService.getPapelera(req.body.path)
+    res.send(folders)
+}
+
 module.exports = {
     getAllFolders,
     createFolder,
     getShared,
-    deleteFolder
+    deleteFolder,
+    getpapelera
 }

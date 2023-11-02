@@ -6,6 +6,6 @@ router
     .post("/",folderController.getAllFolders)   
     .post("/create",folderController.createFolder)
     .post("/shared",folderController.getShared)
-    .post("/delete",folderController.deleteFolder)
-
+    .put("/",folderController.deleteFolder)
+    .post("/papelera",folderController.getpapelera)
 module.exports = router;

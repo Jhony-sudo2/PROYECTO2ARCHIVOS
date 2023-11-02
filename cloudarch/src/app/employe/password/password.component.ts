@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { User } from 'src/app/Clases/User';
 
 @Component({
   selector: 'app-password',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./password.component.css']
 })
 export class PasswordComponent {
+  @Input() usuario:User
 
 }

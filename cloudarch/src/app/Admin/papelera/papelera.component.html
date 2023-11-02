@@ -1,3 +1,7 @@
+<div class="div2">
+    {{pathActual}}
+    <button (click)="atras()">ATRAS</button>
+</div>
 <table class="table table-striped">
     <thead class="table dark">
         <tr>
@@ -18,8 +22,11 @@
             <td>{{tmp.fecha}}</td>
             <td><button (click)="toggleMenu(tmp)">Opciones</button></td>
             <div class="menu-dropdown" *ngIf="elementoSeleccionado == tmp">
-                    <button >Abrir</button>
+                    <button (click)="abrir(tmp)">Abrir</button>
             </div>
         </tr>
     </tbody>
 </table>
+<div class="editor" *ngIf="!opened.valor">
+    <app-editor [tmp]="elementoSeleccionado" [opened]="opened"></app-editor>
+</div>

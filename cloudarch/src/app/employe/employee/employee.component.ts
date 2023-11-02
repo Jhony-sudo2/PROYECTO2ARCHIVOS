@@ -24,7 +24,7 @@ export class EmployeeComponent implements OnInit{
   opened = {valor:true}
   moduleshared = false
   tipoArchivo:Number
-
+  usuarioCompartido:String = ''
 
   ngOnInit(): void {
     this.loadTable();
@@ -42,6 +42,7 @@ export class EmployeeComponent implements OnInit{
 
   showoptions:boolean = false
   showcreated:boolean = false;
+  showshared:boolean = false;
 
   public viewOptions(){
     this.showoptions = true;
@@ -69,9 +70,29 @@ export class EmployeeComponent implements OnInit{
       if(this.tipoArchivo != 1) this.newArchivo.content = ''
       this.newArchivo.fecha = new Date()
       if(this.tipoArchivo == 1){
-      this.service.CreateFolder(this.newArchivo).subscribe(data =>{this.loadTable()})
+      this.service.CreateFolder(this.newArchivo).subscribe(
+        {
+          next:data=>{
+            alert(data+ 'Carpeta creada correctaemente')
+            this.loadTable()
+          },
+          error: err=>{
+            alert('Ya existe una carpeta con el nombre: ' + this.newArchivo.name)
+          }
+        }
+      )
       }else
-        this.service.CreateFile(this.newArchivo).subscribe(data=>{ this.loadTable()})
+        this.service.CreateFile(this.newArchivo).subscribe(
+          {
+            next:data=>{
+              alert(data+ 'Archivo creado correctamente')
+              this.loadTable()
+            },
+            error: err=>{
+              alert('Ya existe un archivo con el nombre: ' + this.newArchivo.name)
+            }
+          }
+        )
       
     
     this.showcreated = false;
@@ -103,7 +124,6 @@ export class EmployeeComponent implements OnInit{
   }
 
   public delete(tmp:Archivo){
-    
     this.service.deletefile(tmp,this.pathActual).subscribe(data=>{
       this.loadTable()
     })
@@ -120,8 +140,12 @@ export class EmployeeComponent implements OnInit{
     })
   }
 
-  public share(tmp:Archivo){
 
+  public share(tmp:Archivo|null){
+    if(tmp != null){
+      console.log('compartiendo: ' + tmp.name + ' con: ' + this.usuarioCompartido);
+      
+    }
   }
 
   public open(tmp:Archivo){

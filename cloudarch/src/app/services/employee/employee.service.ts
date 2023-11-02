@@ -38,7 +38,7 @@ export class EmployeeService {
   public deletefile(tmp:Archivo,pathactual:String){
     const data = {user:tmp.user,name:tmp.name,path:pathactual}
     if(tmp.extension == 'directorio'){
-      return this.http.post(this.path+'/delete',data)
+      return this.http.put(this.path,data)
     }else{
       console.log('eliminando archivo2');
       return this.http.post(this.path2+'/delete',data) 

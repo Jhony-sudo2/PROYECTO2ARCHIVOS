@@ -7,4 +7,5 @@ router
     .post("/delete",fileController.deleteFile)
     .post("/create",fileController.createFile)
     .put("/update",fileController.updateFile)
+    .post('/papelera',fileController.getPapelera)
 module.exports = router;
