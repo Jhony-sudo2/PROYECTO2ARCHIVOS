@@ -6,6 +6,7 @@ const fileSchema = new mongoose.Schema(
         content:String,
         path:String,
         user:String,
+        user2:String,
         extension:String,
         fecha:Date
     }

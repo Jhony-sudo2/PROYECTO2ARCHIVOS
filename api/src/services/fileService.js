@@ -1,10 +1,28 @@
 const fileModel  = require('../models/fileModel')
-
+const userservice = require('../services/userservice')
 
 
 async function getFile(usuario,path2){
     const file = await fileModel.find({user:usuario,path:path2})
     return file;
+}
+
+async function shareFile(archivo){
+    if(await userservice.userexist(archivo.user2) == false){
+        archivo.path = '/compartido'
+        await fileModel.insertMany(archivo)
+        return true
+    }else return false
+
+}
+
+async function moveFile(archivo,newPath){
+    await fileModel.updateOne({user:archivo.user,path:archivo.path,name:archivo.name},{$set:{path:newPath}})
+}
+
+async function getShareFiles(usuario){
+    const archivos = fileModel.find({user2:usuario,path:'/compartido'})
+    return archivos
 }
 
 async function deleteFile(usuario,nombre,path2,newpath){
@@ -38,5 +56,8 @@ module.exports = {
     createFile,
     updateFile,
     Filexist,
-    getPapelera
+    getPapelera,
+    shareFile,
+    getShareFiles,
+    moveFile
 }

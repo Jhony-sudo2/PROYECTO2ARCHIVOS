@@ -31,6 +31,31 @@ async function changePath(nombre,usuario,path2,newpath){
     await folderModel.updateOne({name:nombre,user:usuario,path:path2},{$set:{path:newpath}})
 }
 
+async function moveFolder(archivo,newpath){
+    const pathtmp = archivo.path + '/' + archivo.name
+    await changePath(archivo.name,archivo.user,archivo.path,newpath)
+    let pathhijos
+    if(newpath != '/')
+    pathhijos = newpath + '/'+archivo.name
+    else
+    pathhijos = newpath + archivo.name
+    const folders = await folderModel.find({path:pathtmp,user:archivo.user})
+    const archivos = await folderservice.getFile(archivo.user,pathtmp)
+
+    if(folders.length !=0){
+        folders.forEach(async element=>{
+            moveFolder(element,pathhijos)
+        })
+    }
+    if(archivos.length != 0){
+        archivos.forEach(async element=>{
+            await folderservice.deleteFile(element.user,element.name,element.path,pathhijos)
+        })
+    }
+
+
+}
+
 async function deleteFolder(nombre,usuario,path2){
     let pathtmp
     if(path2 == '/')
@@ -53,7 +78,7 @@ async function deleteFolder(nombre,usuario,path2){
     }
     if(archivos.length != 0){
         archivos.forEach(async element =>{
-            await folderservice.deleteFile(usuario,element.name,element.path,newpath)
+            await folderservice.deleteFile(element.usuario,element.name,element.path,newpath)
         })
     }
 }
@@ -64,5 +89,6 @@ module.exports = {
     getShared,
     deleteFolder,
     Folderexist,
-    getPapelera
+    getPapelera,
+    moveFolder
 }

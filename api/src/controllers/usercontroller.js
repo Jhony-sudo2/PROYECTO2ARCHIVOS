@@ -15,8 +15,15 @@ const createUser = async(req,res)=>{
     }
 }
 
+const updatePassword = async(req,res)=>{
+    console.log('cambiando contrasena');
+    await userservice.updatePassword(req.body)
+    res.status(200).json({message:'OK'})
+}
+
 
 module.exports = {
     getUser,
-    createUser
+    createUser,
+    updatePassword
 };

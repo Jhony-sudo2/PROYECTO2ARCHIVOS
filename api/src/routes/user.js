@@ -5,6 +5,7 @@ const usercontroller = require('../controllers/usercontroller')
 router
     .post("/",usercontroller.getUser)
     .post("/create",usercontroller.createUser)
+    .put('/',usercontroller.updatePassword)
     
 
 

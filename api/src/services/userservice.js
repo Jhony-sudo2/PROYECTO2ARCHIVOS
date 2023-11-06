@@ -13,6 +13,11 @@ async function userexist(usuario){
     
 }
 
+async function updatePassword(usuario){
+    console.log(usuario.username + '   nueva: ' + usuario.password);
+    await userModel.updateOne({username:usuario.username},{$set:{password:usuario.password}})
+}
+
 async function createUser(userData){
     const user = new userModel(userData)
     await user.save()
@@ -23,5 +28,6 @@ async function createUser(userData){
 module.exports = {
     getAllUsers,
     createUser,
-    userexist
+    userexist,
+    updatePassword
 }

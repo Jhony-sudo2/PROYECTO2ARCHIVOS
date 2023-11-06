@@ -5,13 +5,29 @@ const getFilesByPath = async (req, res) => {
     res.send(files)
 }
 
+const moveFile = async(req,res)=>{
+    await fileService.moveFile(req.body.archivo,req.body.newpath)
+    return res.status(200).json({message:'OK'})
+}
+
+const shareFile = async(req,res)=>{
+    if(await fileService.shareFile(req.body) == true)
+    res.status(200).json({message:'OK'})
+    else res.status(409).json({message:'USUARIO NO ENCONTRADO'})
+}
+
+const getShareFiles = async(req,res)=>{
+    const fileshare = await fileService.getShareFiles(req.query.user)
+    res.send(fileshare)
+}
+
 const getFiles = async (req, res) => {
     const file = await fileService.getFile(req.body.user, req.body.path)
     res.send(file);
 }
 
 const deleteFile = async (req, res) => {
-    await fileService.deleteFile(req.body.user, req.body.name, req.body.path)
+    await fileService.deleteFile(req.body.user, req.body.name, req.body.path,'/papelera')
     res.status(200).json({ message: 'OK' })
 }
 
@@ -43,5 +59,8 @@ module.exports = {
     deleteFile,
     createFile,
     updateFile,
-    getPapelera
+    getPapelera,
+    shareFile,
+    getShareFiles,
+    moveFile
 }

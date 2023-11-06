@@ -8,4 +8,5 @@ router
     .post("/shared",folderController.getShared)
     .put("/",folderController.deleteFolder)
     .post("/papelera",folderController.getpapelera)
+    .put("/move",folderController.moveFolder)
 module.exports = router;

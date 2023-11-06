@@ -25,6 +25,9 @@ export class EmployeeComponent implements OnInit{
   moduleshared = false
   tipoArchivo:Number
   usuarioCompartido:String = ''
+  archivotmp:Archivo = new Archivo()
+
+
 
   ngOnInit(): void {
     this.loadTable();
@@ -43,6 +46,7 @@ export class EmployeeComponent implements OnInit{
   showoptions:boolean = false
   showcreated:boolean = false;
   showshared:boolean = false;
+  showselectshare:boolean =false;
 
   public viewOptions(){
     this.showoptions = true;
@@ -124,6 +128,7 @@ export class EmployeeComponent implements OnInit{
   }
 
   public delete(tmp:Archivo){
+    
     this.service.deletefile(tmp,this.pathActual).subscribe(data=>{
       this.loadTable()
     })
@@ -144,7 +149,13 @@ export class EmployeeComponent implements OnInit{
   public share(tmp:Archivo|null){
     if(tmp != null){
       console.log('compartiendo: ' + tmp.name + ' con: ' + this.usuarioCompartido);
-      
+      if(this.usuarioCompartido != this.user.username){
+        this.service.shareFile(tmp,this.usuarioCompartido)
+        this.showshared = false;
+      }else{
+        alert('no te puedes compartir un archivo a ti')
+      }
+
     }
   }
 
@@ -158,6 +169,17 @@ export class EmployeeComponent implements OnInit{
     }else{
       this.opened.valor = !this.opened.valor
     }
+  }
+
+  public move(tmp:Archivo){
+      console.log('moviendo: ' + tmp.name);
+      if(tmp.path != this.pathActual && this.service.cambioValido(tmp,this.pathActual))
+      this.service.moveFile(tmp,this.pathActual).subscribe(data=>{
+        this.loadTable()
+      })
+      else alert('La carpeta no se puede mover en esta direccion')
+      this.showselectshare = false;
+    
   }
 
   public back(){

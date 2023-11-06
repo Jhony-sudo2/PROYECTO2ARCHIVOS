@@ -19,8 +19,14 @@ const createFolder = async(req,res) =>{
     }
 }
 
+const moveFolder = async(req,res)=>{
+    await folderService.moveFolder(req.body.archivo,req.body.newpath)
+    res.status(200).json({message:'OK'})
+}
+
 const deleteFolder = async(req,res)=>{
-    await folderService.deleteFolder(req.body.name,req.body.user,req.body.path)
+    //await folderService.deleteFolder(req.body.name,req.body.user,req.body.path)
+    await folderService.moveFolder(req.body,'/papelera')
     res.status(200).json({message:'OK'})
 }
 
@@ -34,5 +40,6 @@ module.exports = {
     createFolder,
     getShared,
     deleteFolder,
-    getpapelera
+    getpapelera,
+    moveFolder
 }

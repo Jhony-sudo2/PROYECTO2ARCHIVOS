@@ -1,50 +1,30 @@
 body{
-    color: black;
-}
-
-.info {
-    list-style: none;
-    padding: 0;
     margin: 0;
-    background-color: #333;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 0;
 }
 
-.info ul {
+*{
+    box-sizing: border-box;
+}
+
+.container{
     display: flex;
-    align-items: center;
     width: 100%;
+    float:left
 }
 
-.info li {
-    display: inline-block;
+.content{
+    width: 200px;
+    display: flex;
+    flex-direction: column;
 }
-
-.info i.bx {
-    margin-right: 5px; /* Espacio entre el ícono y el texto */
-}
-
-.info li a {
-    text-decoration: none;
-    color: #fff;
-}
-
-.info li a:hover {
-    text-decoration: underline;
-}
-
-.welcome {
-    margin-left: auto;
-
-}
-
 
 .div1{
     background-color:  #f3efee ;
-    float: left;
-    width: 15%;
+    display: flex;
+    height: 35vh;
+    width: 200px;
+    overflow: auto;
 }
 
 .div1 ul li a{
@@ -70,9 +50,10 @@ body{
 }
 
 
+
 .div2{
-    float: left;
-    width: 50%;
+    flex-grow: 1;
+    width: 700px;
 }
 
 .options{
@@ -143,11 +124,32 @@ body{
     cursor: pointer;
 }
 
+
+.crear-button{
+    padding: 10px 20px;
+    margin: 10px 10px 0 0;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    background-color: #4CAF50; /* Color para el botón de "Crear" */
+}
+
+.cancelar-button {
+    padding: 10px 20px;
+    margin: 10px 10px 0 0;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    background-color: #f44336; /* Color para el botón de "Cancelar" */
+}
+
 .folder form .crear-button {
     background-color: #4CAF50; /* Color para el botón de "Crear" */
 }
 
-.folder form .crear-button:hover {
+ .crear-button:hover {
     background-color: #45a049; /* Color de resaltado al pasar el mouse */
 }
 
@@ -155,7 +157,15 @@ body{
     background-color: #f44336; /* Color para el botón de "Cancelar" */
 }
 
+.folder form .crear-button:hover {
+    background-color: #45a049; /* Color de resaltado al pasar el mouse */
+}
+
 .folder form .cancelar-button:hover {
+    background-color: #d32f2f
+}
+
+.cancelar-button:hover {
     background-color: #d32f2f; /* Color de resaltado al pasar el mouse */
 }
 
