@@ -7,8 +7,12 @@ async function getFile(usuario,path2){
     return file;
 }
 
+async function actualizarcontador(archivo,numero){
+    await fileModel.updateOne({name:archivo.name,path:archivo.path,user:archivo.user},{$set:{contador:numero}})
+}
+
 async function eliminar(archivo){
-    await fileModel.deleteOne({user:archivo.user,user2:archivo.user2,name:archivo.name,path:archivo.path})
+    await fileModel.deleteOne({_id:archivo.id})
 }
 
 async function shareFile(archivo){
@@ -56,7 +60,7 @@ async function updateFile(archivo){
 }
 
 async function copyFile(archivo,path2){
-    const archivotmp = {name:archivo.name,user:archivo.user,path:path2,extension:archivo.extension,content:archivo.content,fecha:archivo.fecha}
+    const archivotmp = {name:archivo.name,user:archivo.user,path:path2,extension:archivo.extension,content:archivo.content,fecha:archivo.fecha,contador:0}
     await fileModel.insertMany(archivotmp)
 }   
 
@@ -71,5 +75,6 @@ module.exports = {
     getShareFiles,
     moveFile,
     eliminar,
-    copyFile
+    copyFile,
+    actualizarcontador
 }

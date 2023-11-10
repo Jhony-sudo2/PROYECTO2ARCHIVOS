@@ -5,6 +5,16 @@ const getFilesByPath = async (req, res) => {
     res.send(files)
 }
 
+const copyFile = async(req,res)=>{
+
+    const archivo = req.body
+    archivo.contador = archivo.contador + 1
+    await fileService.actualizarcontador(archivo,archivo.contador)
+    archivo.name = archivo.name + '(' + archivo.contador + ")"
+    await fileService.copyFile(archivo,archivo.path)
+    return res.status(200).json({message:'OK'})
+}
+
 const moveFile = async(req,res)=>{
     await fileService.moveFile(req.body.archivo,req.body.newpath)
     return res.status(200).json({message:'OK'})
@@ -32,7 +42,8 @@ const deleteFile = async (req, res) => {
 }
 
 const deletedFile = async (req,res)=>{
-    await fileService.eliminar(req.body)
+    console.log(req.query);
+    await fileService.eliminar(req.query)
     res.status(200).json({message:'OK'})
 }
 
@@ -68,5 +79,6 @@ module.exports = {
     shareFile,
     getShareFiles,
     moveFile,
-    deletedFile
+    deletedFile,
+    copyFile
 }

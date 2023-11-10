@@ -30,6 +30,9 @@ export class EmployeeService {
     );
   }
   public CreateFolder(newFolder:Folder){
+
+    console.log(newFolder);
+    
     return this.http.post(this.path+'/create',newFolder)
   }
 
@@ -48,8 +51,10 @@ export class EmployeeService {
       console.log('eliminando archivo2');
       if(editable)
       return this.http.post(this.path2+'/delete',data) 
-      else
-      return this.http.post(this.path2+'/deleted',tmp)
+      else{
+        const parametros = new HttpParams().set('id',tmp._id.valueOf())
+        return this.http.delete(this.path2,{params:parametros})
+      }
     }
   }
 

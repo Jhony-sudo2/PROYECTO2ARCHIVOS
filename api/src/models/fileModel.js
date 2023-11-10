@@ -9,7 +9,8 @@ const fileSchema = new mongoose.Schema(
         user2:String,
         extension:String,
         fecha:String,
-        padre:String
+        padre:String,
+        contador:Number
     }
 )
 

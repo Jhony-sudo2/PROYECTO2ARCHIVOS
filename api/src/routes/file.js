@@ -13,5 +13,6 @@ router
     .get('/share',fileController.getShareFiles)
     .put('/move',fileController.moveFile)
     .post('/deleted',fileController.deletedFile)
-    .delete('/detele',fileController.deletedFile)
+    .delete('/',fileController.deletedFile)
+    .post('/copia',fileController.copyFile)
 module.exports = router;

@@ -7,6 +7,9 @@ async function getAllFolders(usuario,path2){
     return folders;
 }
 
+async function actualizarContador(archivo){
+    await folderModel.updateOne({path:archivo.path,name:archivo.name,user:archivo.user},{$set:{contador:archivo.contador}})
+}
 async function getPapelera(path2,identificador){
     let folders
     if(identificador != undefined){
@@ -18,7 +21,7 @@ async function getPapelera(path2,identificador){
 }
 
 function copyFolder(archivo){
-    const newarchivo = {name:archivo.name,path:archivo.path,user:archivo.user,extension:archivo.extension,fecha:archivo.fecha}
+    const newarchivo = {name:archivo.name,path:archivo.path,user:archivo.user,extension:archivo.extension,fecha:archivo.fecha,contador:0}
     return newarchivo
 }
 
@@ -148,5 +151,6 @@ module.exports = {
     Folderexist,
     getPapelera,
     moveFolder,
-    copyFolders
+    copyFolders,
+    actualizarContador
 }

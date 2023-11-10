@@ -7,4 +7,9 @@ export  class Archivo{
     extension:String;
     fecha:String
     content:String;
+    contador:Number;
+
+    constructor(){
+        this.contador = 0
+    }
 }

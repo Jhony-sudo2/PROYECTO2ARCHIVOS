@@ -7,7 +7,8 @@ const folderSchema = new mongoose.Schema(
         user:String,
         extension:String,
         fecha:String,
-        padre:String
+        padre:String,
+        contador:Number
     }
 )
 

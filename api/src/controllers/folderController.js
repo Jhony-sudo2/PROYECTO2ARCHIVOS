@@ -14,7 +14,9 @@ const getShared = async(req,res)=>{
 const copyFolder = async(req,res)=>{
     const archivo = req.body
     const nameoriginal = archivo.name
-    archivo.name = archivo.name + 'copia' 
+    archivo.contador +=1;
+    await folderService.actualizarContador(archivo)
+    archivo.name = archivo.name + '(' + archivo.contador +")"
     await folderService.copyFolders(archivo,archivo.path,nameoriginal   )
     res.status(200).json({message:'OK'})
 }
