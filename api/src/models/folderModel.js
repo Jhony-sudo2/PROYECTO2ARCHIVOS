@@ -6,7 +6,7 @@ const folderSchema = new mongoose.Schema(
         path:String,
         user:String,
         extension:String,
-        fecha:Date,
+        fecha:String,
         padre:String
     }
 )

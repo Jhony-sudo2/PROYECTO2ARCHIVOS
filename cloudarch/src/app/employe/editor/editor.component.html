@@ -4,4 +4,45 @@
     <button (click)="guardarCambios()">Guardar Cambios</button>
     <button (click)="cancelar()">Salir</button>
 </div>
-  
+
+<div class="container">
+    <header>
+      <div class="titulo">
+        <h1>TEXT EDIT</h1>
+      </div>
+      <nav>
+        <div class="opciones">
+          <div class="grupo">
+            <button (click)="execCmd('bold')"><b>N</b></button>
+            <button (click)="execCmd('italic')"><i>K</i></button>
+            <button (click)="execCmd('underline')"><u>S</u></button>
+          </div>
+          <div class="grupo">
+            <button (click)="execCmd('justifyLeft')"><i class="fas fa-align-left"></i></button>
+            <button (click)="execCmd('justifyCenter')"><i class="fas fa-align-center"></i></button>
+            <button (click)="execCmd('justifyRight')"><i class="fas fa-align-right"></i></button>
+          </div>
+          <div class="grupo">
+            <select id="fontsize" onchange="execCmd('fontSize', this.value)">
+              <option value="1">10</option>
+              <option value="2">13</option>
+              <option value="3" selected>16</option>
+              <option value="4">18</option>
+              <option value="5">24</option>
+              <option value="6">32</option>
+              <option value="7">48</option>
+            </select>
+            <input type="color" id="textcolor" onchange="execCmd('foreColor', this.value)">
+
+          </div>
+        </div>
+        <div class="botones">
+          <input type="file" id="file-input" style="display: none;">
+          <button  class="btn">Abrir</button>
+        </div>
+      </nav>
+    </header>
+    <div id="editor" contenteditable="true">
+      
+    </div>
+</div>

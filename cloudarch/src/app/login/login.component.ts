@@ -11,7 +11,9 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent {
 
-  constructor(private service:LoginService,private router:Router,private cookie:CookieService){}
+  constructor(private service:LoginService,private router:Router,private cookie:CookieService){
+
+  }
   user:User = new User()
   user2:User = new User()
 

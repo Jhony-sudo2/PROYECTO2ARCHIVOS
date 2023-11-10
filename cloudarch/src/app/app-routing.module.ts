@@ -7,7 +7,8 @@ import { InicioComponent } from './employe/inicio/inicio.component';
 const routes: Routes = [
   {path:'',component:LoginComponent},
   {path:'empleado',component:InicioComponent},
-  {path:'admin',component:AdminComponent}
+  {path:'admin',component:AdminComponent},
+  
 
 ];
 

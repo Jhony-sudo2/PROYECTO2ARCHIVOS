@@ -3,7 +3,7 @@
         <li class="cloudarch"><a><i class='bx bxs-cloud' style="font-size: 30px;"> CloudArch</i></a></li>
         <li class="centered"><a (click)="tipo = 1">Archivos</a></li>
         <li class="centered"><a (click)="tipo = 2">Cambiar contrasena</a></li>
-        <li class="welcome"><a><i class='bx bx-user-circle'></i>{{usuario.name }} {{ usuario.lastname}}</a></li>
+        <li class="welcome"><a><i class='bx bx-user-circle'></i>{{usuario.name }} {{ usuario.lastname}} <button class="btn" (click)="cerrarSesion()">Cerrar Sesion</button></a></li>
     </ul>
 </div>
     <app-employee *ngIf="tipo == 1" [user]="usuario"></app-employee>

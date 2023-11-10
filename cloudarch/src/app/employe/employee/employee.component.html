@@ -11,8 +11,8 @@
                         <nav>
                             <ul>
                                 <li (click)="CreateFolder()"><a><i class='bx bx-folder-plus'></i>Carpeta</a></li>
-                                <li (click)="CreateFile(2)"><a><i class='bx bxs-file-html'></i>Documento html</a></li>
-                                <li (click)="CreateFile(3)"><a><i class='bx bxs-file-plus'></i>Documento texto</a></li>
+                                <li (click)="CreateFile(3)"><a><i class='bx bxs-file-html'></i>Documento html</a></li>
+                                <li (click)="CreateFile(2)"><a><i class='bx bxs-file-plus'></i>Documento texto</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -51,9 +51,14 @@
                 <tbody class="table dark">
                     <tr *ngFor="let tmp of archivos">
                         <td>
-                            <i class='bx'
-                                [ngClass]="{'bx bxs-folder-open': tmp.extension === 'directorio', 'bx bxs-file-txt': tmp.extension != 'directorio'}"></i>{{
-                            tmp.name }}
+                            <img src="../../../assets/carpeta.png" style="width: 60px; height: 60px"
+                                *ngIf="tmp.extension == 'directorio'">
+                            <img src="../../../assets/txt_icon-.png" style="width: 50px; height: 50px"
+                                *ngIf="tmp.extension == 'txt'">
+                            <img src="../../../assets/HTML.jpg" style="width: 60px; height: 60px"
+                                *ngIf="tmp.extension == 'html'">
+
+                            {{tmp.name }}
                         </td>
                         <td>{{tmp.extension}}</td>
                         <td>{{tmp.user}}</td>
@@ -61,7 +66,8 @@
                         <td><button (click)="toggleMenu(tmp)" class="crear-button">Opciones</button></td>
                         <div class="menu-dropdown" *ngIf="elementoSeleccionado == tmp">
                             <button (click)="delete(tmp)">Eliminar</button>
-                            <button (click)="showshared = true" *ngIf="tmp.extension != 'directorio' && editable" >Compartir</button>
+                            <button (click)="showshared = true"
+                                *ngIf="tmp.extension != 'directorio' && editable">Compartir</button>
                             <button (click)="CreateCopy(tmp)" *ngIf="editable">Crear Copia</button>
                             <button (click)="open(tmp)">Abrir</button>
                             <button (click)="showselectshare=true;archivotmp = tmp" *ngIf="editable">Mover</button>

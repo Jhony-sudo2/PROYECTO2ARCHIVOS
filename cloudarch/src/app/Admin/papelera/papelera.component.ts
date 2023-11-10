@@ -11,7 +11,7 @@ import { EmployeeService } from 'src/app/services/employee/employee.service';
 export class PapeleraComponent {
   archivos:Archivo[] = []
   elementoSeleccionado:Archivo|null = null
-  pathActual = "/papelera"
+  pathActual = "papelera"
   opened = {valor:true}
 
   constructor(private service:AdminService,private service2:EmployeeService){
@@ -49,12 +49,12 @@ export class PapeleraComponent {
   }
 
   public atras(){
-    if(this.pathActual != '/papelera'){
+    if(this.pathActual != 'papelera'){
       const partes = this.pathActual.split("/")
       if(partes.length != 2){
         const newpath = partes.slice(0,-1).join("/")
         this.pathActual = newpath
-      }else this.pathActual = "/"
+      }else this.pathActual = "papelera"
       this.cargarPapelera(null)
     }
   }

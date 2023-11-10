@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { combineAll } from 'rxjs';
 import { Archivo } from 'src/app/Clases/Archivo';
 import { EmployeeService } from 'src/app/services/employee/employee.service';
 
@@ -36,4 +37,10 @@ export class EditorComponent implements OnInit{
   public cancelar(){
     this.opened.valor = !this.opened.valor 
   }
+
+  public execCmd(command:string, value = undefined){
+    document.execCommand(command,false,value)
+
+  }
+
 }

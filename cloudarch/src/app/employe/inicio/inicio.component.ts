@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from 'src/app/Clases/User';
 
@@ -10,8 +11,14 @@ import { User } from 'src/app/Clases/User';
 export class InicioComponent {
   
   usuario:User = new User()
-  constructor(private cookie:CookieService){
+  constructor(private cookie:CookieService,private router:Router){
     this.usuario = JSON.parse(this.cookie.get('Usuario'))
   }
   tipo:Number = 1
+
+  public cerrarSesion(){
+    this.cookie.delete('Usuario')
+    this.router.navigate(['/'])
+  }
+
 }

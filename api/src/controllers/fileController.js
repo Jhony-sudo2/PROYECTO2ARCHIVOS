@@ -27,7 +27,7 @@ const getFiles = async (req, res) => {
 }
 
 const deleteFile = async (req, res) => {
-    await fileService.deleteFile(req.body.user, req.body.name, req.body.path,'/papelera')
+    await fileService.deleteFile(req.body.user, req.body.name, req.body.path,'papelera')
     res.status(200).json({ message: 'OK' })
 }
 

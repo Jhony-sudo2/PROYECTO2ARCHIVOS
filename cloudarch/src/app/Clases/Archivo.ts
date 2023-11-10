@@ -5,6 +5,6 @@ export  class Archivo{
     user:String;
     user2:String;
     extension:String;
-    fecha:Date
+    fecha:String
     content:String;
 }

@@ -47,3 +47,9 @@ li a:hover {
 .welcome {
     text-align: right;
 }
+
+.btn{
+    margin: auto;
+    color: white;
+    background-color: red;
+}

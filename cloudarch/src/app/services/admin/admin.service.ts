@@ -19,7 +19,6 @@ export class AdminService {
   }
 
   public getTrash(path2:String,tmp:Archivo|null){
-    if(tmp!=null) console.log(tmp._id);
     const datos = {path:path2,id:tmp?._id}
     return this.http.post<Archivo[]>(this.path2+'/papelera', datos).pipe(
       switchMap(data => {
@@ -32,8 +31,5 @@ export class AdminService {
     );
   }
 
-  public getFolders(tmp:Archivo){
-    return this.http.post<Archivo[]>(this.path2,tmp)
-  }
 
 }

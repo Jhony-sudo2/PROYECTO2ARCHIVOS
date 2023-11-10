@@ -35,7 +35,7 @@ const moveFolder = async(req,res)=>{
 
 const deleteFolder = async(req,res)=>{
     //await folderService.deleteFolder(req.body.name,req.body.user,req.body.path)
-    await folderService.moveFolder(req.body,'/papelera',1)
+    await folderService.moveFolder(req.body,'papelera',1)
     res.status(200).json({message:'OK'})
 }
 

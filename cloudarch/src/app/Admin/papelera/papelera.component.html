@@ -14,9 +14,12 @@
     <tbody class="table dark">
         <tr *ngFor="let tmp of archivos">
             <td>
-                <i class='bx'
-                    [ngClass]="{'bx bxs-folder-open': tmp.extension === 'directorio', 'bx bxs-file-txt': tmp.extension != 'directorio'}"></i>{{
-                tmp.name }}
+                <img src="../../../assets/carpeta.png" style="width: 60px; height: 60px" *ngIf="tmp.extension == 'directorio'">
+                <img src="../../../assets/txt_icon-.png" style="width: 60px; height: 60px" *ngIf="tmp.extension == 'txt'">
+                <img src="../../../assets/HTML.jpg" style="width: 60px; height: 60px" *ngIf="tmp.extension == 'html'">
+                
+                {{tmp.name }}
+
             </td>
             <td>{{tmp.user}}</td>
             <td>{{tmp.fecha}}</td>
