@@ -1,5 +1,6 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Archivo } from 'src/app/Clases/Archivo';
+import { File } from 'src/app/Clases/File';
 import { Folder } from 'src/app/Clases/Folder';
 import { User } from 'src/app/Clases/User';
 import { EmployeeService } from 'src/app/services/employee/employee.service';
@@ -26,7 +27,7 @@ export class EmployeeComponent implements OnInit{
   tipoArchivo:Number
   usuarioCompartido:String = ''
   archivotmp:Archivo = new Archivo()
-
+  editable:Boolean = true
 
 
   ngOnInit(): void {
@@ -34,6 +35,7 @@ export class EmployeeComponent implements OnInit{
   }
 
   public loadTable(){
+    this.editable = true
     if(this.moduleshared != false)
     this.moduleshared = !this.moduleshared
     this.opcionselected = true
@@ -109,6 +111,7 @@ export class EmployeeComponent implements OnInit{
   }
 
   public loadshared(){
+    this.editable = !this.editable
     this.moduleshared = !this.moduleshared
     this.opcionselected = false
     this.service.loadshared(this.user.username).subscribe(data=>{
@@ -124,25 +127,28 @@ export class EmployeeComponent implements OnInit{
     }
   }
 
-  public edit(tmp:Archivo){
-  }
-
   public delete(tmp:Archivo){
     
-    this.service.deletefile(tmp,this.pathActual).subscribe(data=>{
+    this.service.deletefile(tmp,this.pathActual,this.editable).subscribe(data=>{
+      if(this.editable)
       this.loadTable()
+      else
+      this.loadshared()
     })
   }
 
   public CreateCopy(tmp:Archivo){
-    let folder:Folder = new Folder()
-    folder.name = tmp.name + 'copia'
-    folder.path = tmp.path
-    folder.extension = tmp.extension
-    folder.user = tmp.user
-    this.service.CreateFolder(folder).subscribe(data=>{
-      this.loadTable()
-    })
+    console.log(tmp);
+    if(tmp.extension == 'directorio'){
+      this.service.copyDirectorie(tmp).subscribe(data =>{
+        this.loadTable()
+      }
+      )
+    }else{
+      this.service.copyFile(tmp).subscribe(data =>{
+        this.loadTable()
+      })
+    }
   }
 
 

@@ -1,14 +1,56 @@
+const fileModel = require('../models/fileModel');
 const folderModel = require('../models/folderModel')
-const folderservice = require('../services/fileService')
+const fileService = require('../services/fileService')
 
 async function getAllFolders(usuario,path2){
     const folders = await folderModel.find({path:path2,user:usuario});
     return folders;
 }
 
-async function getPapelera(path2){
-    const folders = await folderModel.find({path:path2})
+async function getPapelera(path2,identificador){
+    let folders
+    if(identificador != undefined){
+        console.log('identificador: ' + identificador);
+        folders = await folderModel.find({path:path2,padre:identificador})
+    }else
+        folders = await folderModel.find({path:path2})
     return folders
+}
+
+function copyFolder(archivo){
+    const newarchivo = {name:archivo.name,path:archivo.path,user:archivo.user,extension:archivo.extension,fecha:archivo.fecha}
+    return newarchivo
+}
+
+async function copyFolders(archivo,path2,nombreOriginal){
+    const archivo2 = copyFolder(archivo)
+    await folderModel.insertMany(archivo2)
+    let pathbusqueda
+    let pathtmp 
+    if(path2 == '/'){
+        pathtmp = path2 + archivo.name
+        pathbusqueda = path2 + nombreOriginal
+    }
+    else {
+        pathtmp = path2 + '/'+archivo.name
+        pathbusqueda = path2 +'/'+ nombreOriginal    
+    }
+
+    const archivos = await folderModel.find({path:pathbusqueda})
+    const archivostxt = await fileModel.find({path:pathbusqueda})
+
+    if(archivos.length !=0){
+        archivos.forEach(async element=>{
+            copyFolders(element,pathtmp,pathbusqueda)
+        })
+    }
+    if(archivostxt.length !=0){
+        archivostxt.forEach(async element=>{
+           await fileService.copyFile(element,pathtmp)
+        })
+    }
+
+
 }
 
 async function getShared(usuario){
@@ -31,32 +73,47 @@ async function changePath(nombre,usuario,path2,newpath){
     await folderModel.updateOne({name:nombre,user:usuario,path:path2},{$set:{path:newpath}})
 }
 
-async function moveFolder(archivo,newpath){
-    const pathtmp = archivo.path + '/' + archivo.name
+async function changePadre(nombre,usuario,path2,padre2){
+    await folderModel.updateOne({name:nombre,user:usuario,path:path2},{$set:{padre:padre2}})
+}
+
+async function moveFolder(archivo,newpath,tipo){
+    let pathtmp 
     await changePath(archivo.name,archivo.user,archivo.path,newpath)
     let pathhijos
-    if(newpath != '/')
-    pathhijos = newpath + '/'+archivo.name
-    else
-    pathhijos = newpath + archivo.name
+    if(newpath != '/')pathhijos = newpath + '/'+archivo.name
+    else pathhijos = newpath + archivo.name
+
+    if(archivo.path != '/')     pathtmp = archivo.path + '/' + archivo.name
+    else     pathtmp = archivo.path + archivo.name
+    
+
     const folders = await folderModel.find({path:pathtmp,user:archivo.user})
-    const archivos = await folderservice.getFile(archivo.user,pathtmp)
+    const archivos = await fileService.getFile(archivo.user,pathtmp)
 
     if(folders.length !=0){
         folders.forEach(async element=>{
-            moveFolder(element,pathhijos)
+            if(tipo == 1) {
+                await changePadre(element.name,element.user,element.path,archivo.id)
+                moveFolder(element,pathhijos,1)
+            }
+                moveFolder(element,pathhijos,0)
         })
     }
     if(archivos.length != 0){
         archivos.forEach(async element=>{
-            await folderservice.deleteFile(element.user,element.name,element.path,pathhijos)
+            if(tipo == 1) {
+                console.log('elemento 1');
+                console.log(archivo.id);
+                await fileService.deleteFile(element.user,element.name,element.path,pathhijos,archivo.id)
+            }else
+            await fileService.deleteFile(element.user,element.name,element.path,pathhijos)
         })
     }
-
-
 }
 
 async function deleteFolder(nombre,usuario,path2){
+    console.log('eliminando');
     let pathtmp
     if(path2 == '/')
     pathtmp = path2 + nombre
@@ -90,5 +147,6 @@ module.exports = {
     deleteFolder,
     Folderexist,
     getPapelera,
-    moveFolder
+    moveFolder,
+    copyFolders
 }

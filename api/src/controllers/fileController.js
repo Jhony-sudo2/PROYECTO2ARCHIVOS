@@ -31,6 +31,11 @@ const deleteFile = async (req, res) => {
     res.status(200).json({ message: 'OK' })
 }
 
+const deletedFile = async (req,res)=>{
+    await fileService.eliminar(req.body)
+    res.status(200).json({message:'OK'})
+}
+
 const createFile = async (req, res) => {
     const r = req.body
     if (await fileService.Filexist(r.user, r.name, r.path) == true) {
@@ -62,5 +67,6 @@ module.exports = {
     getPapelera,
     shareFile,
     getShareFiles,
-    moveFile
+    moveFile,
+    deletedFile
 }

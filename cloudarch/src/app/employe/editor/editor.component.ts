@@ -13,6 +13,7 @@ export class EditorComponent implements OnInit{
   @Input() tmp:Archivo|null
   @Input() opened:{valor:boolean}
   texto:String
+  @Input() editable:Boolean
 
   constructor(private service:EmployeeService){
     

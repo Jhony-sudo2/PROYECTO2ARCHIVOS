@@ -9,4 +9,5 @@ router
     .put("/",folderController.deleteFolder)
     .post("/papelera",folderController.getpapelera)
     .put("/move",folderController.moveFolder)
+    .post('/copia',folderController.copyFolder)
 module.exports = router;

@@ -16,7 +16,7 @@ export class PapeleraComponent {
 
   constructor(private service:AdminService,private service2:EmployeeService){
     
-    this.cargarPapelera()
+    this.cargarPapelera(null)
   }
 
 
@@ -28,12 +28,12 @@ export class PapeleraComponent {
     }
   }
 
-  public cargarPapelera(){
-    
-    this.service.getTrash(this.pathActual).subscribe(data=>{
+  public cargarPapelera(tmp:Archivo|null){
+    this.service.getTrash(this.pathActual,tmp).subscribe(data=>{
       this.archivos = data
     })
   }
+
 
   public abrir(tmp:Archivo){
     if(tmp.extension == 'directorio'){
@@ -41,7 +41,7 @@ export class PapeleraComponent {
       this.pathActual += ""+tmp.name
       else
       this.pathActual += "/"+tmp.name
-      this.cargarPapelera()
+      this.cargarPapelera(tmp)
     }else{
       this.opened.valor = !this.opened.valor
     }
@@ -55,7 +55,7 @@ export class PapeleraComponent {
         const newpath = partes.slice(0,-1).join("/")
         this.pathActual = newpath
       }else this.pathActual = "/"
-      this.cargarPapelera()
+      this.cargarPapelera(null)
     }
   }
 

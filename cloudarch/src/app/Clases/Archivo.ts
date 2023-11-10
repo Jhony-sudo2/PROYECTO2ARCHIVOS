@@ -1,4 +1,5 @@
 export  class Archivo{
+    _id:String;
     name:String;
     path:String;
     user:String;

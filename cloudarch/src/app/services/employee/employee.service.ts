@@ -40,18 +40,29 @@ export class EmployeeService {
     return this.http.get<Archivo[]>(this.path2+'/share',{params:parametros})
   }
 
-  public deletefile(tmp:Archivo,pathactual:String){
-    const data = {user:tmp.user,name:tmp.name,path:pathactual}
+  public deletefile(tmp:Archivo,pathactual:String,editable:Boolean){
+    const data = {id:tmp._id,user:tmp.user,name:tmp.name,path:pathactual}
     if(tmp.extension == 'directorio'){
       return this.http.put(this.path,data)
     }else{
       console.log('eliminando archivo2');
+      if(editable)
       return this.http.post(this.path2+'/delete',data) 
+      else
+      return this.http.post(this.path2+'/deleted',tmp)
     }
   }
 
   public CreateFile(tmp:File){
     return this.http.post(this.path2+'/create',tmp)
+  }
+
+  public copyFile(tmp:File){
+    return this.http.post(this.path2+'/copia',tmp)
+  }
+
+  public copyDirectorie(tmp:Archivo){
+    return this.http.post(this.path+'/copia',tmp)
   }
 
   public updatefile(tmp:Archivo){

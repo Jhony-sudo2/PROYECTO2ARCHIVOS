@@ -60,12 +60,11 @@
                         <td>{{tmp.fecha}}</td>
                         <td><button (click)="toggleMenu(tmp)" class="crear-button">Opciones</button></td>
                         <div class="menu-dropdown" *ngIf="elementoSeleccionado == tmp">
-                            <button (click)="edit(tmp)">Editar</button>
                             <button (click)="delete(tmp)">Eliminar</button>
-                            <button (click)="showshared = true" *ngIf="tmp.extension != 'directorio'">Compartir</button>
-                            <button (click)="CreateCopy(tmp)">Crear Copia</button>
+                            <button (click)="showshared = true" *ngIf="tmp.extension != 'directorio' && editable" >Compartir</button>
+                            <button (click)="CreateCopy(tmp)" *ngIf="editable">Crear Copia</button>
                             <button (click)="open(tmp)">Abrir</button>
-                            <button (click)="showselectshare=true;archivotmp = tmp">Mover</button>
+                            <button (click)="showselectshare=true;archivotmp = tmp" *ngIf="editable">Mover</button>
                         </div>
                     </tr>
                 </tbody>
@@ -74,7 +73,7 @@
         </div>
 
         <div class="editor" *ngIf="!opened.valor">
-            <app-editor [tmp]="elementoSeleccionado" [opened]="opened"></app-editor>
+            <app-editor [tmp]="elementoSeleccionado" [opened]="opened" [editable]="editable"></app-editor>
         </div>
     </div>
 

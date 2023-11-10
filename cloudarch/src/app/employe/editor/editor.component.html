@@ -1,8 +1,7 @@
 {{tmp?.name}}
-{{opened.valor}}
 <div class="editor">
-    <textarea [(ngModel)]="texto" rows="10" cols="40"></textarea>
+    <textarea [(ngModel)]="texto" rows="10" cols="40" [readOnly]="!editable"></textarea>
     <button (click)="guardarCambios()">Guardar Cambios</button>
-    <button (click)="cancelar()">Cancelar</button>
+    <button (click)="cancelar()">Salir</button>
 </div>
   
