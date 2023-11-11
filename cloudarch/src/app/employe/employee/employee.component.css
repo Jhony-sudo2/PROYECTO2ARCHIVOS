@@ -38,7 +38,9 @@ body{
     list-style: none;
 }
 
-
+.div3 button{
+    background-color:gray;
+}
 
 .div1 button{
     border: 1px solid black; /*anchura, estilo y color borde*/

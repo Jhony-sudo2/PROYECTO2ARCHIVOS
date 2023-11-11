@@ -30,9 +30,6 @@ export class EmployeeService {
     );
   }
   public CreateFolder(newFolder:Folder){
-
-    console.log(newFolder);
-    
     return this.http.post(this.path+'/create',newFolder)
   }
 

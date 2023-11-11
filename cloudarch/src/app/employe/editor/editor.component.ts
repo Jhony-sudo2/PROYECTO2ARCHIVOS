@@ -38,9 +38,5 @@ export class EditorComponent implements OnInit{
     this.opened.valor = !this.opened.valor 
   }
 
-  public execCmd(command:string, value = undefined){
-    document.execCommand(command,false,value)
-
-  }
 
 }

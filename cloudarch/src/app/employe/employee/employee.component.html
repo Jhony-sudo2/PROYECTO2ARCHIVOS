@@ -5,7 +5,7 @@
                 <nav>
                     <br>
                     <ul *ngIf="!showoptions">
-                        <button id="buttonview" (click)="viewOptions()">+ Nuevo</button>
+                        <button id="buttonview" (click)="viewOptions()" [disabled]="!editable">+ Nuevo</button>
                     </ul>
                     <div class="options" *ngIf="showoptions" id="options">
                         <nav>
@@ -37,7 +37,13 @@
             </div>
 
         </div>
+
         <div class="div2" *ngIf="opened.valor">
+
+            <div class="div3" *ngIf="opened.valor">
+                <h4>{{pathActual}} 
+                    <button (click)="back()" class="btn">Atras</button></h4>
+            </div>
             <table class="table table-striped">
                 <thead class="table dark">
                     <tr>
@@ -84,10 +90,6 @@
     </div>
 
 
-    <div class="div3" *ngIf="opened.valor">
-        <h3>{{pathActual}}</h3>
-        <button (click)="back()">Atras</button>
-    </div>
 
 
 
