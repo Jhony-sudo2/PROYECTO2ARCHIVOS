@@ -74,9 +74,7 @@ export class EmployeeComponent implements OnInit{
         break
       }
       if(this.tipoArchivo != 1) this.newArchivo.content = ''
-      const fechaActual = new Date();
-      const fechaFormateada = fechaActual.toLocaleString('es-ES', { timeZoneName: 'short' });
-      this.newArchivo.fecha = fechaFormateada
+      this.newArchivo.fecha = this.service.getFecha()
       
       if(this.tipoArchivo == 1){
       this.service.CreateFolder(this.newArchivo).subscribe(

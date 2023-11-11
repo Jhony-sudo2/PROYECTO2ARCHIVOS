@@ -14,6 +14,7 @@
     margin-top: 10px;
     padding: 5px 10px;
     font-size: 14px;
+    margin-right: 10px;
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -31,74 +32,12 @@
     box-sizing: border-box;
     font-family: "Roboto";
   }
-  body{
-    background-color: #323540;
-    color: #939599;
-  }
   
-  header .titulo{
-    background-color: #292c36;
+  .titulo{
+    color: black;
     text-align: center;
   }
-  header nav{
-    max-width: 900px;
-    margin: auto;
-    border-bottom: 3px solid #2e3037;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  
-  }
-  
-  header nav .opciones{
-    display: flex;
-  }
-  header nav .grupo{
-    padding: 10px 20px;
-    border-right: 3px solid #2e3037;
-    display: flex;
-    align-items: center;
-  }
-  header nav .grupo button{
-    background-color: transparent;
-    border: none;
-    color: #939599;
-    font-size: 20px;
-    margin-right: 10px;
-    text-align: center;
-    padding: 3px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: .3s;
-  }
-  header nav .grupo button:hover{
-    background-color: #101114;
-  }
-  header nav .grupo select{
-    background-color: transparent;
-    color: #939599;
-    border: none;
-    outline: none;
-  }
-  header nav .grupo #textcolor{
-    appearance: none;
-    -webkit-appearance: none;
-    border: none;
-    width: 30px;
-    height: 30px;
-    padding: 0;
-    overflow: hidden;
-    background: transparent;
-    margin: 0 5px;
-  }
-  header nav .botones .btn{
-    background-color: #049efc;
-    border: none;
-    padding: 10px 20px;
-    color: #fff;
-   border-radius: 10px;
-   cursor: pointer;
-  }
+
   #editor {
     max-width: 900px;
     margin: 10px auto;
@@ -108,11 +47,4 @@
     color: black;
     outline: none;
   }
-    
-  #options {
-    margin-top: 10px;
-  }
-  
-  #options button, #options select, #options input {
-    margin-right: 10px;
-  }
+   

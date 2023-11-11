@@ -6,12 +6,12 @@
     <thead class="table dark">
         <tr>
             <th>Nombre</th>
+            <th>Extension</th>
             <th>Propietario</th>
-            <th>Fecha Creacion</th>
             <th>Fecha Eliminacion</th>
         </tr>
     </thead>
-    <tbody class="table dark">
+    <tbody class="table dark" *ngIf="opened.valor">
         <tr *ngFor="let tmp of archivos">
             <td>
                 <img src="../../../assets/carpeta.png" style="width: 60px; height: 60px" *ngIf="tmp.extension == 'directorio'">
@@ -21,6 +21,7 @@
                 {{tmp.name }}
 
             </td>
+            <td>{{tmp.extension}}</td>
             <td>{{tmp.user}}</td>
             <td>{{tmp.fecha}}</td>
             <td><button (click)="toggleMenu(tmp)">Opciones</button></td>

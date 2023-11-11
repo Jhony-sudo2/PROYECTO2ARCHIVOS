@@ -17,13 +17,13 @@
                         </nav>
                     </div>
                     <ul>
-                        <li [ngClass]="{'selected':opcionselected}" (click)="loadTable()">
+                        <li [ngClass]="{'selected':opcionselected}" (click)="loadTable();opened.valor = true">
                             <a><i class='bx bx-cloud-drizzle'></i>Mi unidad
                             </a>
                         </li>
                     </ul>
                     <ul>
-                        <li [ngClass]="{'selected':!opcionselected}" (click)="loadshared()">
+                        <li [ngClass]="{'selected':!opcionselected}" (click)="pathActual ='/';loadshared();opened.valor = true">
                             <a><i class='bx bx-share-alt'></i>Compartido con migo
                             </a>
                         </li>
@@ -99,7 +99,10 @@
             <h2 *ngIf="tipoArchivo == 3">Nueva Archivo html</h2>
             <h2 *ngIf="tipoArchivo == 2">Nueva Archivo de texto</h2>
             <input type="text" id="nombre" name="nombre" placeholder="Nombre del archivo" [(ngModel)]="newArchivo.name"
-                #nombre="ngModel" required>
+                #nombre="ngModel" required pattern="^[a-zA-Z0-9\s]*$">
+                <div *ngIf="nombre.invalid">
+                    No se permiten caracteres especiales.
+                </div>
             <button (click)="ConfirmCreateFolder()" [disabled]="nombre.invalid" class="crear-button">Crear</button>
             <button (click)="showcreated = false" class="cancelar-button">Cancelar</button>
         </form>

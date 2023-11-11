@@ -30,6 +30,7 @@ export class EditorComponent implements OnInit{
     if(this.tmp != null){
       this.tmp.content =this.texto
       this.service.updatefile(this.tmp)
+      alert('CAMBIOS GUARDADOS CORRECTAMENTE')
     }
     this.cancelar
   }

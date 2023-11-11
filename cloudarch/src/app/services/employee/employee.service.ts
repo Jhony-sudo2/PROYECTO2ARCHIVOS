@@ -105,18 +105,22 @@ export class EmployeeService {
     })
   }
 
+
+  public getFecha():String{
+    const fechaActual = new Date();
+    const fechaFormateada = fechaActual.toLocaleString('es-ES', { timeZoneName: 'short' });
+    return fechaFormateada
+  }
+
   public shareFile(tmp:Archivo,Usuario:String){
     const tmp2:Archivo = new Archivo()
     tmp2.name = tmp.name
     tmp2.extension = tmp.extension
-    tmp2.fecha = tmp.fecha
+    tmp2.fecha = this.getFecha()
     tmp2.content = tmp.content
     tmp2.path = tmp.path
     tmp2.user = tmp.user
     tmp2.user2 = Usuario
-    console.log('compartiendo: ');
-    console.log(tmp2);
-    
     this.http.post(this.path2+'/share',tmp2).subscribe({
       next:data=>{
         alert('archivo compartido correctamente')
