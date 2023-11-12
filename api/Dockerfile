@@ -6,6 +6,6 @@ WORKDIR /home/app
 COPY . /home/app
 EXPOSE 8080
 
-CMD [ "npm","start"]
+CMD [ "node","/home/app/src/index.js"]
 
  
