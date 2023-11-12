@@ -1,11 +1,19 @@
 version: "3.9"
 services:
+
+  cloudarch:
+    build: ./cloudarch/
+    ports:
+      - "4200:4200"
+    links:
+      - api  
   api:
     build: ./api/
     ports:
       - "8080:8080"
     links:
       - database
+  
   database:
     image: mongo
     ports:
@@ -17,9 +25,3 @@ services:
       - mongo-data:/data/db 
 volumes:
   mongo-data:
-
-
-
-
-
-

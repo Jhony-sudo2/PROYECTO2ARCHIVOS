@@ -15,7 +15,8 @@ app.use('/file',fileRoute)
 
 
 //mongodb connection
-mongoose.connect('mongodb://jhony:password@localhost:27017/myapp')
+//mongoose.connect('mongodb://jhony:password@localhost:27017/myapp')
+mongoose.connect('mongodb://jhony:password@database:27017/miapp?authSource=admin')
 app.listen(port,() => console.log('listening'))
 
 
