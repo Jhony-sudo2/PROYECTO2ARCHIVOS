@@ -19,7 +19,7 @@ export class AdminService {
   }
 
   public getTrash(path2:String,tmp:Archivo|null){
-    const datos = {path:path2,id:tmp?._id}
+    const datos = {path:path2,id:tmp?._id,user:tmp?.user}
     return this.http.post<Archivo[]>(this.path2+'/papelera', datos).pipe(
       switchMap(data => {
         return this.http.post<Archivo[]>(this.path3+'/papelera', datos).pipe(

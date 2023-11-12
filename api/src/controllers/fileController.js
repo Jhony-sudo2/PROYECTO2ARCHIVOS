@@ -57,7 +57,7 @@ const createFile = async (req, res) => {
 }
 
 const getPapelera = async(req,res)=>{
-    const archivos = await fileService.getPapelera(req.body.path)
+    const archivos = await fileService.getPapelera(req.body)
     res.send(archivos)
 }
 

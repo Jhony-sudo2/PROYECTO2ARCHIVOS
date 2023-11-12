@@ -34,19 +34,21 @@ async function getShareFiles(usuario){
 }
 
 async function deleteFile(usuario,nombre,path2,newpath,padre2){
-    console.log('cambiando path');
     await fileModel.updateOne({user:usuario,name:nombre,path:path2},{$set:{path:newpath,padre:padre2}})
 }
 
-async function getPapelera(path2){
-    const archivos = await fileModel.find({path:path2})
-    return archivos
+async function getPapelera(archivo){
+    let archivos2
+    if(archivo.id != undefined)
+        archivos2 = await fileModel.find({path:archivo.path,user:archivo.user,padre:archivo.id})
+    else
+        archivos2 = await fileModel.find({path:archivo.path})
+    return archivos2
 }
 
 async function Filexist(usuario,nombre,path2){
     const filee = await fileModel.find({user:usuario,name:nombre,path:path2})
     const carpeta = await folderModel.find({user:usuario,name:nombre,path:path2})
-    console.log('file: ' + filee);
     if(filee.length == 0 && carpeta.length == 0) return true
     else return false
 }

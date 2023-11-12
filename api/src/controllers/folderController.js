@@ -17,7 +17,7 @@ const copyFolder = async(req,res)=>{
     archivo.contador +=1;
     await folderService.actualizarContador(archivo)
     archivo.name = archivo.name + '(' + archivo.contador +")"
-    await folderService.copyFolders(archivo,archivo.path,nameoriginal   )
+    await folderService.copyFolders(archivo,archivo.path,nameoriginal)
     res.status(200).json({message:'OK'})
 }
 

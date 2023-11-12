@@ -13,7 +13,6 @@ async function actualizarContador(archivo){
 async function getPapelera(path2,identificador){
     let folders
     if(identificador != undefined){
-        console.log('identificador: ' + identificador);
         folders = await folderModel.find({path:path2,padre:identificador})
     }else
         folders = await folderModel.find({path:path2})
@@ -38,12 +37,12 @@ async function copyFolders(archivo,path2,nombreOriginal){
         pathtmp = path2 + '/'+archivo.name
         pathbusqueda = path2 +'/'+ nombreOriginal    
     }
-
     const archivos = await folderModel.find({path:pathbusqueda})
     const archivostxt = await fileModel.find({path:pathbusqueda})
 
     if(archivos.length !=0){
         archivos.forEach(async element=>{
+            element.path = pathtmp
             copyFolders(element,pathtmp,pathbusqueda)
         })
     }
